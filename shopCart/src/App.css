@@ -67,6 +67,15 @@
 .nav-cart {
   display: flex;
   align-items: center;
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.nav-cart:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  transform: scale(1.05);
 }
 
 .cart-info {
@@ -122,6 +131,21 @@
   font-size: 1.2rem;
   color: #7f8c8d;
   line-height: 1.6;
+}
+
+/* Shop Page Styles */
+.shop-page {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+}
+
+.shop-content {
+  padding: 2rem;
+  min-height: calc(100vh - 80px);
+  /* Subtract navbar height */
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 /* Responsive Design */
