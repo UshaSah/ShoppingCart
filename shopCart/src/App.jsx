@@ -7,6 +7,7 @@ import FetchGetRequest from './components/Fetch'
 
 function App() {
   const [count, setCount] = useState(0)
+  const [cartData, setCartData] = useState(null)
 
   // Fetch cart data when app loads
   useEffect(() => {
@@ -19,16 +20,17 @@ function App() {
           throw new Error(`HTTP error: Status ${response.status}`);
         }
 
-        const cartData = await response.json();
-        console.log('App: Cart data received:', cartData);
+        const data = await response.json();
+        console.log('App: Cart data received:', data);
 
         // Calculate total number of products
-        const countProduct = cartData.products.reduce((sum, product) => {
+        const countProduct = data.products.reduce((sum, product) => {
           return sum + product.quantity;
         }, 0);
 
         console.log('App: Total products calculated:', countProduct);
         setCount(countProduct);
+        setCartData(data); // Store cart data for reuse
       } catch (err) {
         console.error('App: Error fetching cart data:', err);
         setCount(0);
@@ -38,7 +40,7 @@ function App() {
     fetchCartData();
   }, []);
 
-  // Function to receive cart count from Fetch component
+  // Function to receive cart count from Fetch component (for test page)
   const handleCartCountUpdate = (cartCount) => {
     console.log('Cart count updated in App:', cartCount);
     setCount(cartCount);
@@ -54,7 +56,7 @@ function App() {
               <FetchGetRequest onCartCountUpdate={handleCartCountUpdate} />
             </>
           } />
-          <Route path="/shop" element={<ShopPage cartCount={count} />} />
+          <Route path="/shop" element={<ShopPage cartCount={count} cartData={cartData} />} />
           <Route path="/test" element={<FetchGetRequest onCartCountUpdate={handleCartCountUpdate} />} />
         </Routes>
       </div>
