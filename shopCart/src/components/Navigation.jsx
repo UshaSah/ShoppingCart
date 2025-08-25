@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
-const Navigation = ({ cartCount = 0 }) => {
+const Navigation = ({ cartCount = 4 }) => {
     const navigate = useNavigate();
 
     const handleCartClick = () => {
