@@ -1,5 +1,6 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 const Navigation = ({ cartCount = 0 }) => {
     const navigate = useNavigate();
@@ -34,5 +35,13 @@ const Navigation = ({ cartCount = 0 }) => {
         </nav>
     );
 };
+
+Navigation.propTypes = {
+    cartCount: PropTypes.number
+};
+
+Navigation.defaultProps = {
+    cartCount: 0
+}
 
 export default Navigation; 

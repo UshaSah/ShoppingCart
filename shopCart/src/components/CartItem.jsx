@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 
 const API_BASE_URL = 'https://fakestoreapi.com'
 
@@ -83,5 +84,10 @@ const CartItem = ({ productId, quantity: initialQuantity }) => {
         </div>
     )
 };
+
+FetchGetRequest.propTypes = {
+    productId: PropTypes.number.isRequired,
+    quantity: PropTypes.number.isRequired
+}
 
 export default CartItem;

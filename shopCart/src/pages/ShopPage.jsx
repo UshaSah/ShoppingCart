@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Navigation from '../components/Navigation';
 import CartItem from '../components/CartItem';
+import PropTypes from 'prop-types';
 
 const ShopPage = ({ cartCount = 0, cartData = null }) => {
     const [showCart, setShowCart] = useState(true);
@@ -61,6 +62,26 @@ const ShopPage = ({ cartCount = 0, cartData = null }) => {
             </div>
         </div>
     );
+};
+
+ShopPage.propTypes = {
+    cartCount: PropTypes.number,
+    cartData: PropTypes.shape({
+        id: PropTypes.number,
+        userId: PropTypes.number,
+        date: PropTypes.string,
+        products: PropTypes.arrayOf(
+            PropTypes.shape({
+                productId: PropTypes.number.isRequired,
+                quantity: PropTypes.number.isRequired
+            })
+        )
+    })
+};
+
+ShopPage.defaultProps = {
+    cartCount: 0,
+    cartData: null
 };
 
 export default ShopPage;
