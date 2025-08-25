@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import './App.css'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import HomePage from './pages/HomePage'
@@ -7,6 +7,36 @@ import FetchGetRequest from './components/Fetch'
 
 function App() {
   const [count, setCount] = useState(0)
+
+  // Fetch cart data when app loads
+  useEffect(() => {
+    const fetchCartData = async () => {
+      try {
+        console.log('App: Fetching cart data...');
+        const response = await fetch('https://fakestoreapi.com/carts/1');
+
+        if (!response.ok) {
+          throw new Error(`HTTP error: Status ${response.status}`);
+        }
+
+        const cartData = await response.json();
+        console.log('App: Cart data received:', cartData);
+
+        // Calculate total number of products
+        const countProduct = cartData.products.reduce((sum, product) => {
+          return sum + product.quantity;
+        }, 0);
+
+        console.log('App: Total products calculated:', countProduct);
+        setCount(countProduct);
+      } catch (err) {
+        console.error('App: Error fetching cart data:', err);
+        setCount(0);
+      }
+    };
+
+    fetchCartData();
+  }, []);
 
   // Function to receive cart count from Fetch component
   const handleCartCountUpdate = (cartCount) => {
@@ -18,7 +48,12 @@ function App() {
     <Router>
       <div className="App">
         <Routes>
-          <Route path="/" element={<HomePage cartCount={count} />} />
+          <Route path="/" element={
+            <>
+              <HomePage cartCount={count} />
+              <FetchGetRequest onCartCountUpdate={handleCartCountUpdate} />
+            </>
+          } />
           <Route path="/shop" element={<ShopPage cartCount={count} />} />
           <Route path="/test" element={<FetchGetRequest onCartCountUpdate={handleCartCountUpdate} />} />
         </Routes>
