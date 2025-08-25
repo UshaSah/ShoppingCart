@@ -2,8 +2,9 @@ import React, { useState, useEffect } from 'react';
 
 const API_BASE_URL = 'https://fakestoreapi.com'
 
-const CartItem = ({ productId, quantity }) => {
+const CartItem = ({ productId, quantity: initialQuantity }) => {
     const [product, setProduct] = useState(null);
+    const [quantity, setQuantity] = useState(initialQuantity);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
@@ -64,6 +65,14 @@ const CartItem = ({ productId, quantity }) => {
                 <div className='cart-item-price'>${product.price.toFixed(2)}</div>
                 <div className='cart-item-quantity'>
                     <span className="quantity-label">Quantity:</span>
+                    <input
+                        type="number"
+                        min="0"
+                        max="99"
+                        value={quantity}
+                        onChange={(e) => setQuantity(parseInt(e.target.value) || 0)}
+                        className='quantity-input'
+                    />
                     <span className="quantity-value">{quantity}</span>
                 </div>
                 <div className='cart-item-total'>
