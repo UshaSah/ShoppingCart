@@ -1,5 +1,6 @@
 import React from 'react';
 import Navigation from '../components/Navigation';
+import PropTypes from 'prop-types';
 
 const HomePage = ({ cartCount = 0 }) => {
     return (
@@ -13,6 +14,14 @@ const HomePage = ({ cartCount = 0 }) => {
             </div>
         </div>
     );
+};
+
+HomePage.propTypes = {
+    cartCount: PropTypes.number
+};
+
+HomePage.defaultProps = {
+    cartCount: 0
 };
 
 export default HomePage; 
