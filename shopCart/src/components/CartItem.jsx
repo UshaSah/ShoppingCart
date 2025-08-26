@@ -35,7 +35,7 @@ const CartItem = ({ productId, quantity: initialQuantity }) => {
     if (loading) {
         return (
             <div className="cart-item loading">
-                <div className="cart-item-skeleton">
+                <div className="cart-item-skeleton" data-testid="cart-item-skeleton">
                     <div className="skeleton-image"></div>
                     <div className="skeleton-content">
                         <div className="skeleton-title"></div>
@@ -85,7 +85,7 @@ const CartItem = ({ productId, quantity: initialQuantity }) => {
     )
 };
 
-FetchGetRequest.propTypes = {
+CartItem.propTypes = {
     productId: PropTypes.number.isRequired,
     quantity: PropTypes.number.isRequired
 }

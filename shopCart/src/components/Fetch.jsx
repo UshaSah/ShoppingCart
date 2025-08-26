@@ -21,6 +21,11 @@ const FetchGetRequest = ({ onCartCountUpdate }) => {
                 const cartData = await response.json();
                 console.log('Fetch component: Cart data received:', cartData); // Test the data
 
+                // Check if cartData is null or doesn't have products
+                if (!cartData || !cartData.products) {
+                    throw new Error('Invalid cart data received');
+                }
+
                 // calculate total number of products
                 const countProduct = cartData.products.reduce((sum, product) => {
                     return sum + product.quantity;

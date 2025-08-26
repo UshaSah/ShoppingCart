@@ -16,12 +16,12 @@ const Navigation = ({ cartCount = 0 }) => {
         <nav className='navbar'>
             <div className='nav-container'>
                 <div className='nav-brand'>
-                    <span className='nav-logo'>🛍️ ShopCart</span>
+                    <Link to="/" className='nav-logo'>🛍️ ShopCart</Link>
                 </div>
 
                 <div className='nav-links'>
-                    <a href="/" className='nav-link active'>Home</a>
-                    <a href="/shop" className='nav-link'>Shop</a>
+                    <Link to="/" className='nav-link active'>Home</Link>
+                    <Link to="/shop" className='nav-link'>Shop</Link>
                 </div>
 
                 <div className="nav-cart" onClick={handleCartClick}>
